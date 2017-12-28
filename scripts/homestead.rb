@@ -360,18 +360,11 @@ class Homestead
             end
         end
 
-        # Update Composer On Every Provision
-        config.vm.provision "shell" do |s|
-            s.name = "Update Composer"
-            s.inline = "sudo /usr/local/bin/composer self-update --no-progress && sudo chown -R vagrant:vagrant /home/vagrant/.composer/"
-            s.privileged = false
-        end
-
         # Install Drush 8.1.15
         config.vm.provision "shell" do |s|
-            s.name = "Install Drush 8.1.15"
-            s.path = scriptDir + "/create-couch.sh"
-            s.privileged = yes
+           s.name = "Install Drush 8.1.15"
+           s.path = scriptDir + "/install-drush.sh"
+           s.privileged = false
         end
 
         # Configure Blackfire.io
