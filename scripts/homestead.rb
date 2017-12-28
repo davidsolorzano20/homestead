@@ -367,6 +367,13 @@ class Homestead
             s.privileged = false
         end
 
+        # Install Drush 8.1.15
+        config.vm.provision "shell" do |s|
+            s.name = "Install Drush 8.1.15"
+            s.path = scriptDir + "/create-couch.sh"
+            s.privileged = yes
+        end
+
         # Configure Blackfire.io
         if settings.has_key?("blackfire")
             config.vm.provision "shell" do |s|
