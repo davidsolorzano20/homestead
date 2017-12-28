@@ -39,8 +39,8 @@ apt-get update
 export DEBIAN_FRONTEND=noninteractive
 
 debconf-set-selections <<< "mariadb-server-10.2 mysql-server/data-dir select ''"
-debconf-set-selections <<< "mariadb-server-10.2 mysql-server/root_password password secret"
-debconf-set-selections <<< "mariadb-server-10.2 mysql-server/root_password_again password secret"
+debconf-set-selections <<< "mariadb-server-10.2 mysql-server/root_password password root"
+debconf-set-selections <<< "mariadb-server-10.2 mysql-server/root_password_again password root"
 
 # Install MariaDB
 
@@ -50,11 +50,11 @@ apt-get install -y mariadb-server
 
 sed -i '/^bind-address/s/bind-address.*=.*/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
 
-mysql --user="root" --password="secret" -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mysql --user="root" --password="root" -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY 'root' WITH GRANT OPTION;"
 service mysql restart
 
-mysql --user="root" --password="secret" -e "CREATE USER 'homestead'@'0.0.0.0' IDENTIFIED BY 'secret';"
-mysql --user="root" --password="secret" -e "GRANT ALL ON *.* TO 'homestead'@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-mysql --user="root" --password="secret" -e "GRANT ALL ON *.* TO 'homestead'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-mysql --user="root" --password="secret" -e "FLUSH PRIVILEGES;"
+mysql --user="root" --password="root" -e "CREATE USER 'drupal'@'0.0.0.0' IDENTIFIED BY 'drupal';"
+mysql --user="root" --password="root" -e "GRANT ALL ON *.* TO 'drupal'@'0.0.0.0' IDENTIFIED BY 'drupal' WITH GRANT OPTION;"
+mysql --user="root" --password="root" -e "GRANT ALL ON *.* TO 'drupal'@'%' IDENTIFIED BY 'drupal' WITH GRANT OPTION;"
+mysql --user="root" --password="root" -e "FLUSH PRIVILEGES;"
 service mysql restart
