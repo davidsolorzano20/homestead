@@ -105,7 +105,7 @@ class MakeCommand extends Command
      */
     protected function isPerProjectInstallation()
     {
-        return (bool) preg_match('/vendor\/laravel\/homestead/', __DIR__);
+        return (bool) preg_match('/vendor\/davidsolorzano20\/homestead/', __DIR__);
     }
 
     /**
