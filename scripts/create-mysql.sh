@@ -2,8 +2,8 @@
 
 cat > /root/.my.cnf << EOF
 [client]
-user = homestead
-password = secret
+user = drupal
+password = drupal
 host = localhost
 EOF
 
